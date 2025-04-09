@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import * as HttpStatusCodes from "stoker/http-status-codes";
-import { jsonContent, jsonContentOneOf, jsonContentRequired } from "stoker/openapi/helpers";
+import { jsonContent, jsonContentRequired } from "stoker/openapi/helpers";
 import { createErrorSchema, IdParamsSchema } from "stoker/openapi/schemas";
 
 import { insertTasksSchema, patchTasksSchema, selectTasksSchema } from "@/db/schema";
@@ -88,15 +88,15 @@ export const patch = createRoute({
       notFoundSchema,
       "Task not found",
     ),
-    // [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContent(
-    //   createErrorSchema(patchTasksSchema)
-    //     .or(createErrorSchema(IdParamsSchema)),
-    //   "The validation error(s)",
-    // ),
-    [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContentOneOf([
-      createErrorSchema(patchTasksSchema),
-      createErrorSchema(IdParamsSchema),
-    ], "The validation error(s)"),
+    [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContent(
+      createErrorSchema(patchTasksSchema)
+        .or(createErrorSchema(IdParamsSchema)),
+      "The validation error(s)",
+    ),
+    // [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContentOneOf([
+    //   createErrorSchema(patchTasksSchema),
+    //   createErrorSchema(IdParamsSchema),
+    // ], "The validation error(s)"),
   },
 });
 
