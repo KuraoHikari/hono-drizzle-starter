@@ -1,7 +1,9 @@
 {
-  "name": "chatbot-api-gpt",
+  "name": "hono-api-reference",
   "type": "module",
   "version": "1.0.0",
+  "description": "A Hono API reference implementation for Scalar. using Hono, Drizzle ORM, and SQLite.",
+  "author": "KuraoHikari",
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch src/index.ts",
